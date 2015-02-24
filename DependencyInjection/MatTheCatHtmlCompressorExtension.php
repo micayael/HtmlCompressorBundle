@@ -26,7 +26,7 @@ class MatTheCatHtmlCompressorExtension extends Extension
         $container->setParameter('html_compressor.htmlcompressor.bin', $config['jar']);
         $container->setParameter('html_compressor.htmlcompressor.options', $config['options']);
 
-        if($config['enabled']) {
+        if ($config['enabled']) {
             $loader = new Loader\YamlFileLoader(
                 $container,
                 new FileLocator(__DIR__.'/../Resources/config')

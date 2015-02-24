@@ -26,7 +26,7 @@ class Configuration implements ConfigurationInterface
                 ->booleanNode('enabled')->defaultTrue()->end()
                 ->scalarNode('java')
                     ->defaultValue(
-                        function() use($finder) {
+                        function () use ($finder) {
                             return $finder->find('java', '/usr/bin/java');
                         })
                 ->end()

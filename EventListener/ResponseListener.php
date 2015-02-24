@@ -2,7 +2,6 @@
 
 namespace MatTheCat\HtmlCompressorBundle\EventListener;
 
-use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\Process\ProcessBuilder;
 
@@ -19,26 +18,26 @@ class ResponseListener
         $this->htmlCompressorOptions = $htmlCompressorOptions;
     }
 
-    public function onKernelResponse(FilterResponseEvent $event) {
+    public function onKernelResponse(FilterResponseEvent $event)
+    {
         $response = $event->getResponse();
-        if(
-            !$response->isCacheable() ||
-            !preg_match('#[a-z]+/(?:html|xml)(?:;|$)#', $response->headers->get('Content-type'))
-        ) {
+
+        if (!$event->isMasterRequest() or !in_array($event->getRequest()->getRequestFormat(), array('html', 'xml'))) {
             return;
         }
+
         $pb = new ProcessBuilder(
             array(
                 $this->javaPath,
                 '-jar',
-                $this->htmlCompressorPath
+                $this->htmlCompressorPath,
             )
         );
-        foreach($this->htmlCompressorOptions as $option => $value) {
-            if(!is_null($option)) {
+        foreach ($this->htmlCompressorOptions as $option => $value) {
+            if (!is_null($option)) {
                 $pb->add($option);
 
-                if(!is_null($value)) {
+                if (!is_null($value)) {
                     $pb->add($value);
                 }
             }
