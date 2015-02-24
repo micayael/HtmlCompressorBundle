@@ -1,3 +1,5 @@
+Fork from https://github.com/MatTheCat/HtmlCompressorBundle
+
 HtmlCompressorBundle
 ====================
 Allow to minify cacheable HTML and XML responses using [htmlcompressor](https://code.google.com/p/htmlcompressor/).
