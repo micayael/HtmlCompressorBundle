@@ -5,6 +5,7 @@
     "keywords": ["matthecat", "xml", "html", "compressor", "minify"],
     "homepage": "https://github.com/MatTheCat/HtmlCompressorBundle",
     "license": "MIT",
+    "version": "1.0.1",
     "repositories":[
         {
             "type":"git",
