@@ -22,7 +22,12 @@ class ResponseListener
     {
         $response = $event->getResponse();
 
-        if (!$event->isMasterRequest() or !in_array($event->getRequest()->getRequestFormat(), array('html', 'xml'))) {
+        if (!$event->isMasterRequest()
+            or
+            !in_array($event->getRequest()->getRequestFormat(), array('html', 'xml'))
+            or
+            get_class($event->getResponse()) !== 'Symfony\Component\HttpFoundation\Response'
+        ) {
             return;
         }
 
